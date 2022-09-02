@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  api:
+    build: api
+    restart: unless-stopped
+    expose:
+      - 8080:8080
+    volumes:
+      - /home/dan/go/src/sprit3dan.dev/weather-reports/weather-reports.db:/app/weather-reports.db
+  web:
+    build: ui
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - /home/dan/go/src/sprit3dan.dev/weather-reports/nginx.conf:/etc/nginx/nginx.conf

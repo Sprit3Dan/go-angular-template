@@ -1,0 +1,15 @@
+# This dockerfile MUST be build from project root.
+# I.E. ../ from the location of this dockerfile
+# Example: docker build . -f ./ui/Dockerfile.dev
+
+FROM node:lts-alpine3.16 as build
+
+RUN apk update && apk add nginx
+
+VOLUME [ "/etc/nginx/nginx.conf"]
+VOLUME [ "/app" ]
+
+WORKDIR /app
+
+EXPOSE 80
+CMD nginx && npm i && npm start
